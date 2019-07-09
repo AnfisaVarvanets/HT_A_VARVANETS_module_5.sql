@@ -112,7 +112,7 @@ select  @sDate = '2013-11-25',
   from cte
   where n < month(@sdate) + datediff(month,@sdate,@edate)
 )
-select StartDate1, dateadd(day,-1,dateadd(month,1,Startdate1)) EndDate1, 
+select 
 case
         when StartDate1 < '2013-11-25' then '2013-11-25'
         when StartDate1 = '2013-12-01' then '2013-12-01'
