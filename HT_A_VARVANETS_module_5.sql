@@ -116,15 +116,15 @@ select StartDate1, dateadd(day,-1,dateadd(month,1,Startdate1)) EndDate1,
 case
         when StartDate1 < '2013-11-25' then '2013-11-25'
         when StartDate1 = '2013-12-01' then '2013-12-01'
-		when StartDate1 = '2014-01-01' then '2014-01-01'
-		when StartDate1 = '2014-02-01' then '2014-02-01'
-		when StartDate1 = '2014-03-01' then '2014-03-01'
+	when StartDate1 = '2014-01-01' then '2014-01-01'
+	when StartDate1 = '2014-02-01' then '2014-02-01'
+	when StartDate1 = '2014-03-01' then '2014-03-01'
     end as StartDate,
 case
        when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2013-11-30' then '2013-11-30'
-	   when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2013-12-31' then '2013-12-31'
-	   when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2014-01-31' then '2014-01-31'
-	   when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2014-02-28' then '2014-02-28'
+       when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2013-12-31' then '2013-12-31'
+       when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2014-01-31' then '2014-01-31'
+       when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2014-02-28' then '2014-02-28'
        when dateadd(day,-1,dateadd(month,1,Startdate1))  > '2014-03-05' then '2014-03-05'
        
     end as EndDate
