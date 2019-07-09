@@ -103,17 +103,31 @@ declare @sDate datetime,
 
 select  @sDate = '2013-11-25',
         @eDate = '2014-03-05'
-
 ;with cte as (
-  select convert(date,left(convert(varchar,@sdate,112),6) + '01') StartDate,
+  select convert(date,left(convert(varchar,@sdate,112),6) + '01') StartDate1,
          month(@sdate) n
   union all
-  select dateadd(month,n,convert(date,convert(varchar,year(@sdate)) + '0101')) StartDate,
+  select dateadd(month,n,convert(date,convert(varchar,year(@sdate)) + '0101')) StartDate1,
         (n+1) n
   from cte
   where n < month(@sdate) + datediff(month,@sdate,@edate)
 )
-select StartDate, dateadd(day,-1,dateadd(month,1,Startdate)) EndDate
+select StartDate1, dateadd(day,-1,dateadd(month,1,Startdate1)) EndDate1, 
+case
+        when StartDate1 < '2013-11-25' then '2013-11-25'
+        when StartDate1 = '2013-12-01' then '2013-12-01'
+		when StartDate1 = '2014-01-01' then '2014-01-01'
+		when StartDate1 = '2014-02-01' then '2014-02-01'
+		when StartDate1 = '2014-03-01' then '2014-03-01'
+    end as StartDate,
+case
+       when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2013-11-30' then '2013-11-30'
+	   when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2013-12-31' then '2013-12-31'
+	   when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2014-01-31' then '2014-01-31'
+	   when dateadd(day,-1,dateadd(month,1,Startdate1))  = '2014-02-28' then '2014-02-28'
+       when dateadd(day,-1,dateadd(month,1,Startdate1))  > '2014-03-05' then '2014-03-05'
+       
+    end as EndDate
 from cte
 
 
