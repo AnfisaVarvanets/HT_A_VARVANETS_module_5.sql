@@ -5,7 +5,7 @@ from supplies X
 where NOT EXISTS (
                   SELECT *
                   FROM supplies
-                  WHERE supplierid  != 3
+                  WHERE supplierid  <> 3
                     AND X.productid = productid
                  );
 
